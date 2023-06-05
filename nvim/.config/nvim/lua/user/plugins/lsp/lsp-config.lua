@@ -29,7 +29,7 @@ local on_attach = function(client, bufnr)
 		["gD"] = { "<CMD>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
 		["gr"] = { "<CMD>lua vim.lsp.buf.references()<cr>", "Goto referencer" },
 		["<leader>la"] = { "<CMD>Lspsaga code_action<CR>", "Code action" },
-		["<leader>lr"] = { "<CMD>Lspsaga rename<CR>", "Rename" },
+		["<leader>lR"] = { "<CMD>Lspsaga rename<CR>", "Rename" },
 		["<leader>ld"] = { "<CMD>Lspsaga show_line_diagnostics<CR>", "Show line diagnostics" },
 		["<leader>lD"] = { "<CMD>Lspsaga show_buf_diagnostics<CR>", "Show line diagnostics" },
 	}, {
@@ -37,7 +37,7 @@ local on_attach = function(client, bufnr)
 	})
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
 lspconfig["html"].setup({
 	capabilities = capabilities,
@@ -68,6 +68,12 @@ lspconfig["jdtls"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
+
+lspconfig["rust_analyzer"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
 
 -- configure lua server (with special settings)
 lspconfig["lua_ls"].setup({
